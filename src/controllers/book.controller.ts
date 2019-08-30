@@ -4,11 +4,31 @@ import { BooksService } from 'src/services/book.service';
 
 @Controller('books')
 export class BooksController {
-  // constructor(private booksService: BooksService) { }
-  
+  constructor(private booksService: BooksService) { }
+
   @Get()
-  findAll(): string {
+  async getBooks() {
     return 'This action returns all books';
   }
-  
+
+  @Get(':bookId')
+  findOne(@Param('bookId') bookId) {
+    return 'book1';
+  }
+
+  @Post()
+  public async createBook(@Body() book: Book) {
+    return 'Return book';
+  }
+
+  @Delete(':bookID')
+    async deleteBook(@Param('bookID') bookID) {
+        return 'books';
+    }
+
+    @Put(':bookID')
+    async editBook(@Param('bookID') bookID, @Body() book: Book) {
+        return 'books';
+    }
+
 }

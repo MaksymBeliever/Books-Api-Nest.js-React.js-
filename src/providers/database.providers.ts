@@ -1,4 +1,4 @@
-import config from 'src/Environment/config/keys';
+import config from 'src/environment/config/keys';
 
 import * as mongoose from 'mongoose';
 

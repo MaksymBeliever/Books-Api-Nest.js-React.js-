@@ -4,7 +4,10 @@ import { Book } from 'src/documents/book/db.data';
 
 @Injectable()
 export class BookRepository {
-  constructor(private readonly bookRepository: BookRepository) { }
+  constructor(
+    @Inject('BOOK_MODEL')
+    private readonly bookRepository: BookRepository) {
+  }
 
   async findAll(): Promise<Book[]> {
     const books = this.bookRepository.findAll();
@@ -16,6 +19,5 @@ export class BookRepository {
     const book = this.bookRepository.findOne( id );
 
     return book;
-  }  
-
+  }
 }

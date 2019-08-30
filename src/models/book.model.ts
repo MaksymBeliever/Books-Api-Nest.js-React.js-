@@ -1,8 +1,7 @@
-export interface Book  {
+export class Book  {
    id?: string;
    title?: string;
-   description: string;
+   description?: string;
    authors: any[];
    coast: string;
-
 }

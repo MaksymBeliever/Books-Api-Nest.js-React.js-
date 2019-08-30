@@ -4,8 +4,11 @@ import { BookRepository } from 'src/repositories/book.repository';
 
 @Injectable()
 export class BooksService {
-    constructor(private readonly bookRepository: BookRepository) {}
+    constructor(private readonly bookServiceRepository: BookRepository) {
+    }
 
-    
-
+    public async getAll(): Promise<Book[]> {
+        const book = await this.bookServiceRepository.findAll();
+        return book;
+      }
 }
