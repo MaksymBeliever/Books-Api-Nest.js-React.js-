@@ -1,4 +1,4 @@
-import {  Controller,  Get,  Put,  Post,  Delete,  Body,  Param} from '@nestjs/common';
+import {  Controller, Get, Put, Post, Delete, Body, Param } from '@nestjs/common';
 import { Book } from 'src/models/book.model';
 import { BooksService } from 'src/services/book.service';
 
@@ -6,29 +6,27 @@ import { BooksService } from 'src/services/book.service';
 export class BooksController {
   constructor(private booksService: BooksService) { }
 
-  @Get()
-  async getBooks() {
-    return 'This action returns all books';
-  }
+  @Get('/:bookId')
+    public async getBook(@Param('bookId') bookId) {
+      const book = await this.booksService.findOne(bookId);
+      return 'documentation';
+    }
 
-  @Get(':bookId')
-  findOne(@Param('bookId') bookId) {
-    return 'book1';
-  }
+  @Get()
+    public async getBooks() {
+      const books = await this.booksService.findAll();
+      return books;
+    }
 
   @Post()
-  public async createBook(@Body() book: Book) {
-    return 'Return book';
-  }
-
-  @Delete(':bookID')
-    async deleteBook(@Param('bookID') bookID) {
-        return 'books';
+    public async addBook(@Body() book: Book) {
+      const newBook = await this.booksService.create(book);
+      return newBook;
     }
 
-    @Put(':bookID')
-    async editBook(@Param('bookID') bookID, @Body() book: Book) {
-        return 'books';
+  @Delete('/:bookId')
+    public async deleteBook(@Param('bookId') bookID: string) {
+      const books = this.booksService.delete(bookID);
+      return books;
     }
-
 }

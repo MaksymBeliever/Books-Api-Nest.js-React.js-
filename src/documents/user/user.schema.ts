@@ -7,5 +7,4 @@ export const UserSchema = new mongoose.Schema({
     password: String,
     typeOfUser: String,
     created: Date,
- 
 });

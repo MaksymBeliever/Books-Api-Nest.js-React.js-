@@ -6,18 +6,27 @@ import { Book } from 'src/documents/book/db.data';
 export class BookRepository {
   constructor(
     @Inject('BOOK_MODEL')
-    private readonly bookRepository: BookRepository) {
+    private readonly bookModel: Model<Book>,
+  ) { }
+
+  async findOne(id: string): Promise<Book> {
+    const book = await this.bookModel.find().exec();
+    return book;
   }
 
   async findAll(): Promise<Book[]> {
-    const books = this.bookRepository.findAll();
-
+    const books = await this.bookModel.find().exec();
     return books;
   }
 
-  async findOne(id: string): Promise<Book> {
-    const book = this.bookRepository.findOne( id );
+  async create(book: Book): Promise<Book> {
+    const createdBook = new this.bookModel(book);
+    const newBook = await createdBook.save();
+    return newBook;
+  }
 
-    return book;
+  async delete(id: string): Promise<Book> {
+    const deletedBook = await this.bookModel.findByIdAndRemove(id);
+    return deletedBook;
   }
 }
