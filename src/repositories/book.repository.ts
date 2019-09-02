@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
-import { Book } from 'src/documents/book/db.data';
+import { Book } from 'src/documents/dbData/db.bookData';
 
 @Injectable()
 export class BookRepository {

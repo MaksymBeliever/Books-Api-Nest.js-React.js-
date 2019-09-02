@@ -1,5 +1,5 @@
 import { Connection } from 'mongoose';
-import { BookSchema } from 'src/documents/book/book.schema';
+import { BookSchema } from 'src/documents/schemas/book.schema';
 
 export const BooksProviders = [
     {

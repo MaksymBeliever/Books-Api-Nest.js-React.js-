@@ -1,6 +1,6 @@
 import { Model } from 'mongoose';
 import { Injectable, Inject } from '@nestjs/common';
-import { User } from 'src/documents/user/db.data';
+import { User } from 'src/documents/dbData/db.userData';
 
 @Injectable()
 export class UserRepository {

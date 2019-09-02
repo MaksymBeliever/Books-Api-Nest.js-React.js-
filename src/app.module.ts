@@ -1,10 +1,13 @@
 // nest modules
 import { Module } from '@nestjs/common';
 
+// Config
+import config from 'src/environment/config/keys';
+
 // Schemas
-import { BookSchema } from 'src/documents/book/book.schema';
-import { UserSchema } from 'src/documents/user/user.schema';
-import { AuthorSchema } from 'src/documents/author/author.schema';
+import { BookSchema } from 'src/documents/schemas/book.schema';
+import { UserSchema } from 'src/documents/schemas/user.schema';
+import { AuthorSchema } from 'src/documents/schemas/author.schema';
 
 // Controllers
 import { BooksController } from 'src/controllers/book.controller';
@@ -26,6 +29,10 @@ import { AuthorsProviders } from 'src/providers/authors.provider';
 import { BookRepository } from 'src/repositories/book.repository';
 import { UserRepository } from 'src/repositories/user.repository';
 import { AuthorRepository } from 'src/repositories/author.repository';
+
+// JWT
+// import { JwtStrategy } from 'src/strategy/jwt.strategy';
+// import { LocalStrategy } from 'src/strategy/local.strategy';
 
 @Module({
   imports: [],
