@@ -1,10 +1,10 @@
 import {  Controller,  Get,  Put,  Post,  Delete,  Body,  Param} from '@nestjs/common';
 import { User } from 'src/models/user.model';
-import { UsersService } from 'src/services/user.service';
+import { UserService } from 'src/services/user.service';
 
 @Controller('users')
 export class UsersController {
-    constructor(private usersService: UsersService) { }
+    constructor(private usersService: UserService) { }
 
     @Get('/:userId')
         public async getBook(@Param('userId') userId) {

@@ -1,5 +1,17 @@
-// nest modules
+// Nest modules
 import { Module } from '@nestjs/common';
+import { MongooseModule } from '@nestjs/mongoose';
+import { PassportModule } from '@nestjs/passport';
+
+// JWT
+import { jwtConstants } from 'src/strategy/constants';
+import { JwtModule } from '@nestjs/jwt';
+
+// import { JwtStrategy } from 'src/strategy/jwt.strategy';
+import { JwtStrategy } from 'src/strategy/jwt.strategy';
+
+// import { LocalStrategy } from 'src/strategy/local.strategy';
+import { LocalStrategy } from 'src/strategy/local.strategy';
 
 // Config
 import config from 'src/environment/config/keys';
@@ -13,11 +25,13 @@ import { AuthorSchema } from 'src/documents/schemas/author.schema';
 import { BooksController } from 'src/controllers/book.controller';
 import { UsersController } from 'src/controllers/user.controller';
 import { AuthorsController } from 'src/controllers/author.controller';
+import { AuthController } from 'src/controllers/auth.controller';
 
 // Services
 import { BooksService } from 'src/services/book.service';
-import { UsersService } from 'src/services/user.service';
+import { UserService } from 'src/services/user.service';
 import { AuthorsService } from 'src/services/author.service';
+import { AuthService } from 'src/services/auth.service';
 
 // Providers
 import { databaseProviders } from 'src/providers/database.providers';
@@ -30,21 +44,26 @@ import { BookRepository } from 'src/repositories/book.repository';
 import { UserRepository } from 'src/repositories/user.repository';
 import { AuthorRepository } from 'src/repositories/author.repository';
 
-// JWT
-// import { JwtStrategy } from 'src/strategy/jwt.strategy';
-// import { LocalStrategy } from 'src/strategy/local.strategy';
-
 @Module({
-  imports: [],
+  imports: [ PassportModule.register({ defaultStrategy: 'jwt' }),
+  JwtModule.register({
+    secret: jwtConstants.secret,
+    signOptions: {
+      expiresIn: '600s',
+    },
+  }),
+],
   controllers: [
                 BooksController,
                 UsersController,
                 AuthorsController,
+                AuthController,
   ],
   providers: [
               BooksService,
-              UsersService,
+              UserService,
               AuthorsService,
+              AuthService,
               BookRepository,
               UserRepository,
               AuthorRepository,
@@ -52,6 +71,8 @@ import { AuthorRepository } from 'src/repositories/author.repository';
               ...BooksProviders,
               ...UsersProviders,
               ...AuthorsProviders,
+              LocalStrategy,
+              JwtStrategy,
   ],
 })
 export class AppModule {}

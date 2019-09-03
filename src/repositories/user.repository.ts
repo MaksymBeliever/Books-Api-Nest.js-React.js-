@@ -29,4 +29,8 @@ export class UserRepository {
     const deletedUser = await this.userModel.deleteOne(id);
     return deletedUser;
   }
+
+  async findOneByName(username: string): Promise<User> {
+    return await this.userModel.findOne({username});
+  }
 }
